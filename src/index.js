@@ -4,6 +4,7 @@ import Users from './componens/users';
 import './index.css';
 
 import reportWebVitals from './reportWebVitals';
+import "bootstrap/dist/css/bootstrap.css"
 
 ReactDOM.render(
   <React.StrictMode>
