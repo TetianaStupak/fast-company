@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const Qualetie = ({ color, name, _id }) => {
     return (
@@ -6,6 +7,12 @@ const Qualetie = ({ color, name, _id }) => {
             {name}
         </span>
     );
+};
+
+Qualetie.propTypes = {
+    color: PropTypes.string,
+    name: PropTypes.string,
+    _id: PropTypes.number
 };
 
 export default Qualetie;

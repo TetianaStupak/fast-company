@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import Users from "./componens/users";
 import SearchStatus from "./componens/searchStatus";
-import api from "./api"
+import api from "./api";
 
 function App() {
     const [users, setUsers] = useState(api.users.fetchAll());
@@ -16,9 +16,9 @@ function App() {
                 }
                 return user;
             })
-        )
-        console.log(id)
-    }
+        );
+        console.log(id);
+    };
     return (
         <div>
             <SearchStatus length={users.length} />
