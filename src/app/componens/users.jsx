@@ -13,9 +13,11 @@ const Users = ({ users: allUsers, ...rest }) => {
     const count = allUsers.length;
     const pageSize = 4;
     useEffect(() => {
-        api.professions.fetchAll().then((date) => {
-            setProfession(date);
-        });
+        api.professions
+            .fetchAll()
+            .then((date) => {
+                setProfession(date);
+            });
     }, []);
 
     const handleProfessionSelect = item => {
@@ -28,15 +30,21 @@ const Users = ({ users: allUsers, ...rest }) => {
         ? allUsers.filter((user) => user.profession === selectedProf)
         : allUsers;
     const userCrop = paginate(filteredUsers, currentPage, pageSize);
+    const clearFilter = () => {
+        setSelectedProf();
+    };
 
     return (
         <>
             {professions && (
-                <GroupList
-                    selectedItem={selectedProf}
-                    items={professions}
-                    onItemSelect={handleProfessionSelect}
-                />
+                <>
+                    <GroupList
+                        selectedItem={selectedProf}
+                        items={professions}
+                        onItemSelect={handleProfessionSelect}
+                    />
+                    <button className="btn btn-secondary mt-2" onClick={clearFilter}>Очистить</button>
+                </>
             )}
             {count > 0 && (
                 <table className="table">
