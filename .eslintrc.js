@@ -19,8 +19,17 @@ module.exports = {
   ],
   rules: {
     "indent": "off",
-    "semi": [2, "always"],
-    "space-before-function-paren": ["error", "never"],
-    "quotes": ["error", "double", { "allowTemplateLiterals": true }]
+    semi: [2, "always"],
+    "space-before-function-paren": [
+      "error",
+      { anonymous: "always", named: "never" }
+    ],
+    quotes: [
+      "error",
+      "double",
+      {
+        allowTemplateLiterals: true
+      }
+    ]
   }
 }
