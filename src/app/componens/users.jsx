@@ -12,15 +12,11 @@ const Users = ({ users: allUsers, ...rest }) => {
     const count = allUsers.length;
     const pageSize = 4;
     useEffect(() => {
-        console.log("start");
         api.professions.fetchAll().then((date) => {
             setProfession(date);
         });
-        console.log("currentPage");
     }, []);
-    useEffect(() => {
-        console.log(professions);
-    }, [professions]);
+
     const handleProfessionSelect = (params) => {
         console.log(params);
     };
@@ -32,7 +28,14 @@ const Users = ({ users: allUsers, ...rest }) => {
 
     return (
         <>
-            <GroupList items={professions} onItemSelect={handleProfessionSelect} />
+            {professions && (
+                <GroupList
+                    items={professions}
+                    onItemSelect={handleProfessionSelect}
+                    valueProperty="_id"
+                    contentProperty="name"
+                />
+            )}
             {count > 0 && (
                 <table className="table">
                     <thead>

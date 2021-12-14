@@ -12,7 +12,7 @@ const Qualetie = ({ color, name, _id }) => {
 Qualetie.propTypes = {
     color: PropTypes.string,
     name: PropTypes.string,
-    _id: PropTypes.number
+    _id: PropTypes.string
 };
 
 export default Qualetie;

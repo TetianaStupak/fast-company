@@ -43,15 +43,15 @@ const User = ({
     );
 };
 User.propTypes = {
-    _id: PropTypes.number,
+    _id: PropTypes.string,
     name: PropTypes.string,
     qualities: PropTypes.array,
-    profession: PropTypes.func,
+    profession: PropTypes.object,
     completedMeetings: PropTypes.number,
     rate: PropTypes.number,
-    onDelete: PropTypes.object,
-    bookmark: PropTypes.string,
-    onToggleBookMark: PropTypes.object
+    onDelete: PropTypes.func,
+    bookmark: PropTypes.bool,
+    onToggleBookMark: PropTypes.func
 };
 
 export default User;
