@@ -14,11 +14,7 @@ const Users = ({ users: allUsers, ...rest }) => {
 
     const pageSize = 2;
     useEffect(() => {
-        api.professions
-            .fetchAll()
-            .then((date) => {
-                setProfession(date);
-            });
+        api.professions.fetchAll().then((data) => setProfession(data));
     }, []);
     useEffect(() => {
         setCurrentPage(1);
@@ -31,8 +27,13 @@ const Users = ({ users: allUsers, ...rest }) => {
         setCurrentPage(pageIndex);
     };
     const filteredUsers = selectedProf
-        ? allUsers.filter((user) => user.profession === selectedProf)
+        ? allUsers.filter(
+            (user) =>
+                JSON.stringify(user.profession) ===
+                JSON.stringify(selectedProf)
+        )
         : allUsers;
+
     const count = filteredUsers.length;
     const userCrop = paginate(filteredUsers, currentPage, pageSize);
     const clearFilter = () => {
@@ -49,7 +50,13 @@ const Users = ({ users: allUsers, ...rest }) => {
                         items={professions}
                         onItemSelect={handleProfessionSelect}
                     />
-                    <button className="btn btn-secondary mt-2" onClick={clearFilter}>Очистить</button>
+                    <button
+                        className="btn btn-secondary mt-2"
+                        onClick={clearFilter}
+                    >
+                        {" "}
+                        Очистить
+                    </button>
                 </div>
             )}
             <div className="d-flex flex-column">
@@ -84,7 +91,6 @@ const Users = ({ users: allUsers, ...rest }) => {
                     />
                 </div>
             </div>
-
         </div>
     );
 };
