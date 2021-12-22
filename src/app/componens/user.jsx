@@ -26,12 +26,6 @@ const User = ({
             <td>{completedMeetings}</td>
             <td>{rate} /5</td>
             <td>
-                <BookMark
-                    status={bookmark}
-                    onClick={() => onToggleBookMark(_id)}
-                />
-            </td>
-            <td>
                 <button
                     onClick={() => onDelete(_id)}
                     className="btn btn-danger"
