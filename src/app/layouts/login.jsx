@@ -2,11 +2,13 @@ import React from "react";
 import { useState } from "react/cjs/react.development";
 
 const Login = () => {
-    const [email, setEmail] = useState("");
+    const [date, setDate] = useState({ email: "", password: "" });
 
-    const handleChange = (e) => {
-        setEmail(e.target.value);
-        console.log(e.target);
+    const handleChange = ({ target }) => {
+        setDate((prevState) => ({
+            ...prevState,
+            [target.name]: target.value
+        }));
     };
     return (
         <form action="">
@@ -16,8 +18,9 @@ const Login = () => {
                     type="text"
                     id="email"
                     name="email"
-                    value={email}
-                    onChange={handleChange} />
+                    value={date.email}
+                    onChange={handleChange}
+                />
             </div>
             <div>
                 <label htmlFor="password">Password</label>
@@ -25,21 +28,9 @@ const Login = () => {
                     type="password"
                     id="password"
                     name="password"
+                    value={date.password}
+                    onChange={handleChange}
                 />
-            </div>
-            <div>
-                <div>
-                    <label htmlFor="radio1">Radio 1</label>
-                    <input
-                        type="radio"
-                        id="radio1"
-                        name="radio"
-                    />
-                </div>
-                <div>
-                    <label htmlFor="radio2">Radio 2</label>
-                    <input type="radio" id="radio2" name="radio" />
-                </div>
             </div>
         </form >
     );
