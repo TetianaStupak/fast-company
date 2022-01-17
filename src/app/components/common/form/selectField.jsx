@@ -7,6 +7,7 @@ const SelectField = ({
     onChange,
     defaultOption,
     options,
+    name,
     error
 }) => {
     const handleChange = ({ target }) => {
@@ -23,13 +24,13 @@ const SelectField = ({
         : options;
     return (
         <div className="mb-4">
-            <label htmlFor="validationCustom04" className="form-label">
+            <label htmlFor={name} className="form-label">
                 {label}
             </label>
             <select
                 className={getInputClasses()}
-                id="validationCustom04"
-                name="profession"
+                id={name}
+                name={name}
                 value={value}
                 onChange={handleChange}
             >
@@ -61,6 +62,7 @@ SelectField.propTypes = {
     value: PropTypes.string,
     onChange: PropTypes.func,
     error: PropTypes.string,
+    name: PropTypes.string,
     options: PropTypes.oneOfType([PropTypes.object, PropTypes.array])
 };
 
