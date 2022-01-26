@@ -4,6 +4,9 @@ import { validator } from "../../../utils/validator";
 import api from "../../../api";
 import TextField from "../../common/form/textField";
 import SelectField from "../../common/form/selectField";
+import RadioField from "../../common/form/radioField";
+import MultiSelectField from "../../common/form/multiSelectField";
+import BackHistoryButton from "../../common/backButton";
 
 const EditUserPage = () => {
     const { userId } = useParams();
@@ -12,7 +15,9 @@ const EditUserPage = () => {
     const [data, setData] = useState({
         name: "",
         email: "",
-        profession: ""
+        profession: "",
+        sex: "male",
+        qualities: []
     });
     const [professions, setProfession] = useState([]);
     const [qualities, setQualities] = useState({});
@@ -98,6 +103,7 @@ const EditUserPage = () => {
     const isValid = Object.keys(errors).length === 0;
     return (
         <div className="container mt-5">
+            <BackHistoryButton />
             <div className="row">
                 <div className="col-md-6 offset-md-3 shadow p-4">
                     {!isLoading && Object.keys(professions).length > 0 ? (
@@ -124,6 +130,24 @@ const EditUserPage = () => {
                                 onChange={handleChange}
                                 value={data.profession}
                                 error={errors.profession}
+                            />
+                            <RadioField
+                                options={[
+                                    { name: "Male", value: "male" },
+                                    { name: "Female", value: "female" },
+                                    { name: "Other", value: "other" }
+                                ]}
+                                value={data.sex}
+                                name="sex"
+                                onChange={handleChange}
+                                label="Выберите ваш пол"
+                            />
+                            <MultiSelectField
+                                defaultValue={data.qualities}
+                                options={qualities}
+                                onChange={handleChange}
+                                name="qualities"
+                                label="Выберите ваши качества"
                             />
                             <button
                                 type="submit"

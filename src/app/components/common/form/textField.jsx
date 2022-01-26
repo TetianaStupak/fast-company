@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 const TextField = ({ label, type, name, value, onChange, error }) => {
     const [showPassword, setShowPassword] = useState(false);
+
     const handleChange = ({ target }) => {
         onChange({ name: target.name, value: target.value });
     };
@@ -34,13 +35,11 @@ const TextField = ({ label, type, name, value, onChange, error }) => {
                             className={
                                 "bi bi-eye" + (showPassword ? "-slash" : "")
                             }
-                        >
-                        </i>
+                        ></i>
                     </button>
                 )}
                 {error && <div className="invalid-feedback">{error}</div>}
             </div>
-
         </div>
     );
 };

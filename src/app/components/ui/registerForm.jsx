@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { validator } from "../../utils/validator";
 import TextField from "../common/form/textField";
 import api from "../../api";
-import SelectField from "./../common/form/selectField";
+import SelectField from "../common/form/selectField";
 import RadioField from "../common/form/radioField";
 import MultiSelectField from "../common/form/multiSelectField";
 import CheckBoxField from "../common/form/checkBoxField";
 
 const RegisterForm = () => {
-    const [data, setDate] = useState({
+    const [data, setData] = useState({
         email: "",
         password: "",
         profession: "",
@@ -24,7 +24,7 @@ const RegisterForm = () => {
         api.qualities.fetchAll().then((data) => setQualities(data));
     }, []);
     const handleChange = (target) => {
-        setDate((prevState) => ({
+        setData((prevState) => ({
             ...prevState,
             [target.name]: target.value
         }));
@@ -32,21 +32,21 @@ const RegisterForm = () => {
     const validatorConfig = {
         email: {
             isRequired: {
-                message: "Электронная пошта обязательна для заполнения"
+                message: "Электронная почта обязательна для заполнения"
             },
             isEmail: {
-                message: "Email введен не корректно"
+                message: "Email введен некорректно"
             }
         },
         password: {
             isRequired: {
-                message: "Пароль обязательный для заполнения"
+                message: "Пароль обязателен для заполнения"
             },
             isCapitalSymbol: {
                 message: "Пароль должен содержать хотя бы одну заглавную букву"
             },
             isContainDigit: {
-                message: "Пароль должен содержать хотя бы одну цифру"
+                message: "Пароль должен содержать хотя бы одно число"
             },
             min: {
                 message: "Пароль должен состоять минимум из 8 символов",
@@ -55,12 +55,13 @@ const RegisterForm = () => {
         },
         profession: {
             isRequired: {
-                message: "Обязательно выберете вашу профессию "
+                message: "Обязательно выберите вашу профессию"
             }
         },
         licence: {
             isRequired: {
-                message: "Вы не можете использовать наш сервис без подтверждения лицинзионного соглашения"
+                message:
+                    "Вы не можете использовать наш сервис без подтверждения лицензионного соглашения"
             }
         }
     };
@@ -83,14 +84,14 @@ const RegisterForm = () => {
     return (
         <form onSubmit={handleSubmit}>
             <TextField
-                label="Email"
+                label="Электронная почта"
                 name="email"
                 value={data.email}
                 onChange={handleChange}
                 error={errors.email}
             />
             <TextField
-                label="Password"
+                label="Пароль"
                 type="password"
                 name="password"
                 value={data.password}
@@ -100,8 +101,8 @@ const RegisterForm = () => {
             <SelectField
                 label="Выбери свою профессию"
                 defaultOption="Choose..."
-                name="professions"
                 options={professions}
+                name="profession"
                 onChange={handleChange}
                 value={data.profession}
                 error={errors.profession}
@@ -115,14 +116,14 @@ const RegisterForm = () => {
                 value={data.sex}
                 name="sex"
                 onChange={handleChange}
-                label="Выберете Ваш пол"
+                label="Выберите ваш пол"
             />
             <MultiSelectField
-                label="Выберите Ваши качества"
                 options={qualities}
                 onChange={handleChange}
                 defaultValue={data.qualities}
                 name="qualities"
+                label="Выберите ваши качества"
             />
             <CheckBoxField
                 value={data.licence}
@@ -132,15 +133,14 @@ const RegisterForm = () => {
             >
                 Подтвердить <a>лицензионное соглашение</a>
             </CheckBoxField>
-
             <button
+                className="btn btn-primary w-100 mx-auto"
                 type="submit"
                 disabled={!isValid}
-                className="btn btn-primary w-100 mx-auto"
             >
                 Submit
             </button>
-        </form >
+        </form>
     );
 };
 

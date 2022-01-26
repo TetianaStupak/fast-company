@@ -18,22 +18,17 @@ const CheckBoxField = ({ name, value, onChange, children, error }) => {
                 onChange={handleChange}
                 checked={value}
             />
-            <label
-                className="form-check-label"
-                htmlFor={name}
-            >
+            <label className="form-check-label" htmlFor={name}>
                 {children}
             </label>
-            {error && <div className="invalid-feedback">
-                {error}
-            </div>}
+            {error && <div className="invalid-feedback">{error}</div>}
         </div>
     );
 };
 CheckBoxField.propTypes = {
     name: PropTypes.string,
-    onChange: PropTypes.func,
     value: PropTypes.bool,
+    onChange: PropTypes.func,
     children: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.node),
         PropTypes.node
