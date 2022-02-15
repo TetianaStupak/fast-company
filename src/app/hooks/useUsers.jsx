@@ -1,6 +1,6 @@
-import React, { useContext, useState, useEffect } from "react";
-import { PropTypes } from "prop-types";
-import userService from "./../services/user.service";
+import React, { useContext, useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import userService from "../services/user.service";
 import { toast } from "react-toastify";
 
 const UserContext = React.createContext();
@@ -8,6 +8,7 @@ const UserContext = React.createContext();
 export const useUser = () => {
     return useContext(UserContext);
 };
+
 const UserProvider = ({ children }) => {
     const [users, setUsers] = useState([]);
     const [isLoading, setLoading] = useState(true);
@@ -33,6 +34,7 @@ const UserProvider = ({ children }) => {
     function errorCatcher(error) {
         const { message } = error.response.data;
         setError(message);
+        setLoading(false);
     }
     return (
         <UserContext.Provider value={{ users }}>
