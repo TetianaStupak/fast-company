@@ -29,7 +29,7 @@ const NavProfile = () => {
                     Profile
                 </Link>
                 <Link
-                    to="logOut"
+                    to="/logout"
                     className="dropdown-item"
                 >
                     Log Out
