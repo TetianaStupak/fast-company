@@ -51,6 +51,18 @@ export const CommentsProvider = ({ children }) => {
         const { message } = error?.response?.data ?? error?.message;
         setError(message);
     };
+    async function removeComment(id) {
+        try {
+            const { content } = await commentService.removeComment(id);
+            if (content === null) {
+                setComments(
+                    prevState => prevState.filter((c) => c._id !== id)
+                );
+            }
+        } catch (error) {
+            errorCatcher(error);
+        }
+    }
     useEffect(() => {
         if (error !== null) {
             toast(error);
@@ -62,7 +74,8 @@ export const CommentsProvider = ({ children }) => {
             value={{
                 comments,
                 createComment,
-                isLoading
+                isLoading,
+                removeComment
             }}
         >
             {children}
