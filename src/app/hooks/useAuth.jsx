@@ -60,6 +60,14 @@ const AuthProvider = ({ children }) => {
         setUser(null);
         history.push("/");
     };
+    async function updateUserData(data) {
+        try {
+            const { content } = await userService.update(data);
+            setUser(content);
+        } catch (error) {
+            errorCatcher(error);
+        }
+    }
 
     async function signUp({ email, password, ...rest }) {
         try {
@@ -136,7 +144,8 @@ const AuthProvider = ({ children }) => {
             signUp,
             logIn,
             currentUser,
-            logOut
+            logOut,
+            updateUserData
         }}
         >
             {!isLoading ? children : "Loading..."}
