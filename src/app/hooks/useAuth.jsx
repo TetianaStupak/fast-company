@@ -60,6 +60,7 @@ const AuthProvider = ({ children }) => {
         setUser(null);
         history.push("/");
     };
+
     async function updateUserData(data) {
         try {
             const { content } = await userService.update(data);
@@ -67,7 +68,7 @@ const AuthProvider = ({ children }) => {
         } catch (error) {
             errorCatcher(error);
         }
-    }
+    };
 
     async function signUp({ email, password, ...rest }) {
         try {
