@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-// import { useHistory, useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { validator } from "../../../utils/validator";
 import TextField from "../../common/form/textField";
 import SelectField from "../../common/form/selectField";
@@ -11,11 +11,10 @@ import { useQualities } from "./../../../hooks/useQualities";
 import { useProfessions } from "./../../../hooks/useProfession";
 
 const EditUserPage = () => {
-    // const { userId } = useParams();
-    // const history = useHistory();
+    const history = useHistory();
     const [isLoading, setIsLoading] = useState(true);
     const [data, setData] = useState();
-    const { currentUser } = useAuth();
+    const { currentUser, updateUserData } = useAuth();
     const { qualities, isLoading: qualitiesLoading } = useQualities();
     const { professions, isLoading: professionLoading } = useProfessions();
     const professionList = professions.map(
@@ -48,19 +47,15 @@ const EditUserPage = () => {
     //     }
     //     return qualitiesArray;
     // };
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const isValid = validate();
         if (!isValid) return;
-        // const { profession, qualities } = data;
-        // api.users
-        //     .update(userId, {
-        //         ...data,
-        //         profession: getProfessionById(profession),
-        //         qualities: getQualities(qualities)
-        //     })
-        //     .then((data) => history.push(`/users/${data._id}`));
-        console.log(data);
+        await updateUserData({
+            ...data,
+            qualities: data.qualities.map((q) => q.value)
+        });
+        history.push(`/users/${currentUser._id}`);
     };
     function getQualitiesListByIds(qualitiesIds) {
         const qualitiesArray = [];
