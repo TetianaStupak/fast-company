@@ -30,23 +30,7 @@ const EditUserPage = () => {
     );
 
     const [errors, setErrors] = useState({});
-    // const getProfessionById = (id) => {
-    //     for (const prof in professions) {
-    //         const profData = professions[prof];
-    //         if (profData._id === id) return profData;
-    //     }
-    // };
-    // const getQualities = (elements) => {
-    //     const qualitiesArray = [];
-    //     for (const elem of elements) {
-    //         for (const quality in qualities) {
-    //             if (elem.value === qualities[quality]._id) {
-    //                 qualitiesArray.push(qualities[quality]);
-    //             }
-    //         }
-    //     }
-    //     return qualitiesArray;
-    // };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const isValid = validate();
@@ -74,7 +58,6 @@ const EditUserPage = () => {
             label: qual.name,
             value: qual._id
         }));
-        console.log(result);
         return result;
     };
     useEffect(() => {
